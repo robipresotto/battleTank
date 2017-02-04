@@ -2,8 +2,9 @@
 
 #pragma once
 
+#include "Tank.h"
 #include "GameFramework/PlayerController.h"
-#include "tankPlayerController.generated.h"
+#include "tankPlayerController.generated.h" // Must be the last include
 
 /**
  * 
@@ -13,7 +14,8 @@ class BATTLETANK_API AtankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-	
+public:
+    ATank* GetControlledTank() const;
 	
 	
 };
