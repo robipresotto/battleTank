@@ -19,4 +19,3 @@ void AtankPlayerController::BeginPlay() {
 ATank* AtankPlayerController::GetControlledTank() const {
     return Cast<ATank>(GetPawn());
 }
-

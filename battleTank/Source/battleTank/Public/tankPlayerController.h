@@ -15,7 +15,9 @@ class BATTLETANK_API AtankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+    
     ATank* GetControlledTank() const;
-	
+
     void BeginPlay() override;
+    
 };
