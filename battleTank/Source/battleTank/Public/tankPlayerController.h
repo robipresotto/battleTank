@@ -18,6 +18,13 @@ private:
     
     ATank* GetControlledTank() const;
 
-    void BeginPlay() override;
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;
+
+    // Called every frame
+    virtual void Tick( float DeltaSeconds ) override;
+    
+    // Start the tank moving the barrel so that a shot whould it where the crosshair intersects the world
+    void AimTowardsCrosshair();
     
 };

@@ -16,6 +16,24 @@ void AtankPlayerController::BeginPlay() {
     
 }
 
+void AtankPlayerController::Tick( float DeltaTime ) {
+    Super::Tick( DeltaTime );
+    
+    AimTowardsCrosshair();
+    
+    UE_LOG(LogTemp, Warning, TEXT("Player controller ticking..."));
+}
+
 ATank* AtankPlayerController::GetControlledTank() const {
     return Cast<ATank>(GetPawn());
+}
+
+void AtankPlayerController::AimTowardsCrosshair() {
+    
+    if (!GetControlledTank()) { return ; }
+    
+    // Get world location if linetrace through crosshair
+    // if it hits the landscape
+    
+    
 }
