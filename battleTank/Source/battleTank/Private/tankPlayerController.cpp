@@ -21,7 +21,6 @@ void AtankPlayerController::Tick( float DeltaTime ) {
     
     AimTowardsCrosshair();
     
-    UE_LOG(LogTemp, Warning, TEXT("Player controller ticking..."));
 }
 
 ATank* AtankPlayerController::GetControlledTank() const {

@@ -18,23 +18,6 @@ void UtankAimingComponent::setBarrelReference(UStaticMeshComponent *barrelToSet)
     barrel = barrelToSet;
 }
 
-// Called when the game starts
-void UtankAimingComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
-	
-}
-
-
-// Called every frame
-void UtankAimingComponent::TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction )
-{
-	Super::TickComponent( DeltaTime, TickType, ThisTickFunction );
-
-	// ...
-}
 
 void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
     
@@ -52,17 +35,32 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
          startLocation,
          HitLocation,
          launchSpeed,
-         false,
-         0,
-         0,
          ESuggestProjVelocityTraceOption::DoNotTrace
          )
         ) {
     
         auto ourTankName = GetOwner()->GetName();
         auto aimDirection = outLaunchVelocity.GetSafeNormal();
+        
+        MoveBarrelTowards(aimDirection);
+        
         UE_LOG(LogTemp, Warning, TEXT("%s Aiming at %s"), *ourTankName, *aimDirection.ToString());
 
     }
+    
+}
+
+void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
+    
+    // Work-out difference between current barrel rotation, and AimDirection
+    
+    auto barrelRotator = barrel->GetForwardVector().Rotation();
+    auto AimAsRotator = AimDirection.Rotation();
+    auto deltaRotator = AimAsRotator - barrelRotator;
+    
+    UE_LOG(LogTemp, Warning, TEXT("AimRotator: %s"), *deltaRotator.ToString());
+    
+    // Move the barrel the right amount this frame
+    // Given a max elevation speed, and the frame time
     
 }
