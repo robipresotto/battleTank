@@ -11,11 +11,11 @@ class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
     
-protected:
-    UtankAimingComponent *tankAimingComponent = nullptr;
-
 public:
     void AimAt(FVector hitLocation);
+    
+protected:
+    UtankAimingComponent *tankAimingComponent = nullptr;
 
 private:
 	// Sets default values for this pawn's properties
