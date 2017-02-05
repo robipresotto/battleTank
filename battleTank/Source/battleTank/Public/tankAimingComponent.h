@@ -14,6 +14,8 @@ class BATTLETANK_API UtankAimingComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UtankAimingComponent();
+    
+    void setBarrelReference(UStaticMeshComponent *barrelToSet);
 
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -23,4 +25,7 @@ public:
 
     void AimAt(FVector hitLocation);
 	
+private:
+    UStaticMeshComponent *barrel = nullptr;
+    
 };
