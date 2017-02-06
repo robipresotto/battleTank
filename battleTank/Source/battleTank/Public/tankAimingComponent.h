@@ -19,7 +19,7 @@ public:
     
     void setBarrelReference(UTankBarret *barrelToSet);
     
-    // TODO add SetTurretRef
+    // TODO: add SetTurretRef
     
     void AimAt(FVector hitLocation, float launchSpeed);
 	

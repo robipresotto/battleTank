@@ -10,7 +10,7 @@ UtankAimingComponent::UtankAimingComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	PrimaryComponentTick.bCanEverTick = true; // TODO: Should this really tick?
 
 	// ...
 }
@@ -45,7 +45,13 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
         
         MoveBarrelTowards(aimDirection);
         
-        UE_LOG(LogTemp, Warning, TEXT("%s Aiming at %s"), *ourTankName, *aimDirection.ToString());
+        auto time = GetWorld()->GetTimeSeconds();
+        UE_LOG(LogTemp, Warning, TEXT("%f - Aim solution found"), time);
+
+    } else {
+        
+        auto time = GetWorld()->GetTimeSeconds();
+        UE_LOG(LogTemp, Warning, TEXT("%f - No aim solve found"), time);
 
     }
     
@@ -59,6 +65,6 @@ void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     auto AimAsRotator = AimDirection.Rotation();
     auto deltaRotator = AimAsRotator - barrelRotator;
         
-    barrel->elevate(5); //TODO Remove magic number
+    barrel->elevate(5); //TODO: Remove magic number
     
 }
