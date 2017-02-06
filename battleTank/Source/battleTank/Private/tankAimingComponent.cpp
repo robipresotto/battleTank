@@ -36,6 +36,9 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
          startLocation,
          HitLocation,
          launchSpeed,
+         false,
+         0,
+         0,
          ESuggestProjVelocityTraceOption::DoNotTrace
          )
         ) {
