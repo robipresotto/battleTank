@@ -66,10 +66,6 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
     
 }
 
-void UtankAimingComponent::RotateTurret(FVector AimDegrees) {
-    //TODO:
-}
-
 void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     
     // Work-out difference between current barrel rotation, and AimDirection
@@ -79,5 +75,6 @@ void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     auto deltaRotator = AimAsRotator - barrelRotator;
         
     barrel->elevate(deltaRotator.Pitch);
+    turret->rotate(deltaRotator.Yaw);
     
 }
