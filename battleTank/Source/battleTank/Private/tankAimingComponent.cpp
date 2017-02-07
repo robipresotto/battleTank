@@ -68,6 +68,6 @@ void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     auto AimAsRotator = AimDirection.Rotation();
     auto deltaRotator = AimAsRotator - barrelRotator;
         
-    barrel->elevate(5); //TODO: Remove magic number
+    barrel->elevate(deltaRotator.Pitch); //TODO: Remove magic number
     
 }
