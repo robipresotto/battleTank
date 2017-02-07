@@ -54,14 +54,6 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
         
         MoveBarrelTowards(aimDirection);
         
-        auto time = GetWorld()->GetTimeSeconds();
-        UE_LOG(LogTemp, Warning, TEXT("%f - Aim solution found"), time);
-
-    } else {
-        
-        auto time = GetWorld()->GetTimeSeconds();
-        UE_LOG(LogTemp, Warning, TEXT("%f - No aim solve found"), time);
-
     }
     
 }
