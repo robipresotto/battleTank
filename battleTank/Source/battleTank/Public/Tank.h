@@ -1,10 +1,11 @@
-// Copyright 2017 Robinson Presotto. All rights reserved.
+
 
 #pragma once
 
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+class UTankTurret;
 class UTankBarret;
 class UtankAimingComponent;
 
@@ -15,6 +16,9 @@ class BATTLETANK_API ATank : public APawn
     
 public:
     void AimAt(FVector hitLocation);
+    
+    UFUNCTION(BlueprintCallable, Category = Setup)
+    void SetTurretReference(UTankTurret *turretToSet);
     
     UFUNCTION(BlueprintCallable, Category = Setup)
     void SetBarrelReference(UTankBarret *barrelToSet);
