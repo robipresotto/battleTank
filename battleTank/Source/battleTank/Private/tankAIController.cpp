@@ -7,13 +7,7 @@
 void AtankAIController::BeginPlay() {
     Super::BeginPlay();
     
-    auto playerTank = GetPlayerTank();
-    
-    if (!playerTank) {
-        UE_LOG(LogTemp, Warning, TEXT("TankAIController not controlling player tank"));
-    } else {
-        UE_LOG(LogTemp, Warning, TEXT("TankAIController controlling player %s tank"), *playerTank->GetName());
-    }
+    // ...
     
 }
 
@@ -21,13 +15,17 @@ void AtankAIController::BeginPlay() {
 void AtankAIController::Tick( float DeltaTime ) {
     Super::Tick( DeltaTime );
     
-    if (GetPlayerTank()) {
-        //TODO: move towards the player
-        
+    auto playerTank = GetPlayerTank();
+    auto controlledTank = GetControlledTank();
+    
+    if (playerTank) {
+
         // Aim towards the player
-        GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+        controlledTank->AimAt(playerTank->GetActorLocation());
         
         // Fire if ready
+        controlledTank->Fire();
+        
     }
 }
 
