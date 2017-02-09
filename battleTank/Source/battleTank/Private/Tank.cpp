@@ -1,6 +1,8 @@
 // Copyright 2017 Robinson Presotto. All rights reserved.
 
 #include "battleTank.h"
+#include "TankBarret.h"
+#include "Projectile.h"
 #include "tankAimingComponent.h"
 #include "Tank.h"
 
@@ -31,6 +33,7 @@ void ATank::SetupPlayerInputComponent(class UInputComponent* InputComponent)
 
 void ATank::SetBarrelReference(UTankBarret *barrelToSet) {
     tankAimingComponent->setBarrelReference(barrelToSet);
+    barrel = barrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret *turretToSet) {
@@ -45,5 +48,15 @@ void ATank::Fire() {
     
     auto time = GetWorld()->GetTimeSeconds();
     UE_LOG(LogTemp, Warning, TEXT("%f - Tank fires"), time);
+    
+    if (!barrel) {return;}
+    
+    // spawn a projectile at the socket location on the barrel
+    
+    GetWorld()->SpawnActor<AProjectile>(
+        projectileBlueprint,
+        barrel->GetSocketLocation(FName("Projectile")),
+        barrel->GetSocketRotation(FName("Projectile"))
+    );
     
 }
