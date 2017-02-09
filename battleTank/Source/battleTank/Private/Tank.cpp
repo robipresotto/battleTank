@@ -45,18 +45,17 @@ void ATank::AimAt(FVector hitLocation) {
 }
 
 void ATank::Fire() {
-    
-    auto time = GetWorld()->GetTimeSeconds();
-    UE_LOG(LogTemp, Warning, TEXT("%f - Tank fires"), time);
-    
+        
     if (!barrel) {return;}
     
     // spawn a projectile at the socket location on the barrel
     
-    GetWorld()->SpawnActor<AProjectile>(
+    auto projectile = GetWorld()->SpawnActor<AProjectile>(
         projectileBlueprint,
         barrel->GetSocketLocation(FName("Projectile")),
         barrel->GetSocketRotation(FName("Projectile"))
     );
+    
+    projectile->LaunchProjectile(launchSpeed);
     
 }
