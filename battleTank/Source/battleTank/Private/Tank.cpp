@@ -4,6 +4,7 @@
 #include "TankBarret.h"
 #include "Projectile.h"
 #include "tankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "Tank.h"
 
 
@@ -15,6 +16,7 @@ ATank::ATank()
 
     // No need to protect points as added at construction
     tankAimingComponent = CreateDefaultSubobject<UtankAimingComponent>(FName("Aiming Component"));
+
 }
 
 // Called when the game starts or when spawned
