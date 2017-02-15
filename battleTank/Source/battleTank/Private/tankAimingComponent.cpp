@@ -16,13 +16,8 @@ UtankAimingComponent::UtankAimingComponent()
 	// ...
 }
 
-void UtankAimingComponent::setBarrelReference(UTankBarret *barrelToSet) {
-    if (!barrelToSet) { return; };
+void UtankAimingComponent::Initialise(UTankBarret *barrelToSet, UTankTurret *turretToSet) {
     barrel = barrelToSet;
-}
-
-void UtankAimingComponent::setTurretReference(UTankTurret *turretToSet) {
-    if (!turretToSet) { return; };
     turret = turretToSet;
 }
 
@@ -61,7 +56,7 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
 void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     
     // Work-out difference between current barrel rotation, and AimDirection
-    
+    if (!barrel || !turret) { return; }
     auto barrelRotator = barrel->GetForwardVector().Rotation();
     auto AimAsRotator = AimDirection.Rotation();
     auto deltaRotator = AimAsRotator - barrelRotator;

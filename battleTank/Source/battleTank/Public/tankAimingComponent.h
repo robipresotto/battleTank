@@ -23,21 +23,21 @@ class BATTLETANK_API UtankAimingComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-
-    UtankAimingComponent();
     
-    void setBarrelReference(UTankBarret *barrelToSet);
-    void setTurretReference(UTankTurret *turretToSet);
+    UFUNCTION(BlueprintCallable, Category = "Setup")
+    void Initialise(UTankBarret *barrelToSet, UTankTurret *turretToSet);
     
     void AimAt(FVector hitLocation, float launchSpeed);
     
 protected:
     // accessed by tankPlayerController
     UPROPERTY(BlueprintReadOnly, Category = "State")
-    EFiringState tankFireState = EFiringState::Aiming;
+    EFiringState tankFireState = EFiringState::Locked;
 	
 private:
     
+    UtankAimingComponent();
+
     UTankBarret *barrel = nullptr;
     UTankTurret *turret = nullptr;
     void MoveBarrelTowards(FVector AimDirection);

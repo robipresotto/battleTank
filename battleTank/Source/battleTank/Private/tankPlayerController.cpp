@@ -3,11 +3,17 @@
 #include "battleTank.h"
 #include "Tank.h"
 #include "tankPlayerController.h"
+#include "tankAimingComponent.h"
 
 void AtankPlayerController::BeginPlay() {
     Super::BeginPlay();
     
-    //...
+    auto aimingComponent = GetControlledTank()->FindComponentByClass<UtankAimingComponent>();
+    
+    if (aimingComponent) {
+        FoundAimingComponent(aimingComponent);
+    }
+    
 }
 
 void AtankPlayerController::Tick( float DeltaTime ) {
