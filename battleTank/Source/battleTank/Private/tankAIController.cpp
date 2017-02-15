@@ -18,7 +18,7 @@ void AtankAIController::Tick( float DeltaTime ) {
     auto playerTank = GetPlayerTank();
     auto controlledTank = GetControlledTank();
     
-    if (playerTank) {
+    if (ensure(playerTank)) {
         
         // Move towards the player
         MoveToActor(playerTank, AcceptanceRadius);
@@ -40,7 +40,7 @@ ATank* AtankAIController::GetPlayerTank() const {
     
     auto playerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
 
-    if (!playerPawn) { return nullptr; } else {
+    if (!ensure(playerPawn)) { return nullptr; } else {
         return Cast<ATank>(playerPawn);
     }
     

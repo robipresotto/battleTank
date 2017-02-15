@@ -10,7 +10,7 @@ void AtankPlayerController::BeginPlay() {
     
     auto aimingComponent = GetControlledTank()->FindComponentByClass<UtankAimingComponent>();
     
-    if (aimingComponent) {
+    if (ensure(aimingComponent)) {
         FoundAimingComponent(aimingComponent);
     }
     
@@ -29,7 +29,7 @@ ATank* AtankPlayerController::GetControlledTank() const {
 
 void AtankPlayerController::AimTowardsCrosshair() {
     
-    if (!GetControlledTank()) { return ; }
+    if (!ensure(GetControlledTank())) { return ; }
     
     FVector hitLocation; //out parameter
     

@@ -25,18 +25,19 @@ void ATank::BeginPlay() {
     auto tankName = GetName();
     UE_LOG(LogTemp, Warning, TEXT("%s DONKEY: Tank C++ Begin Play"), *tankName);
 
-    
 }
 
 void ATank::AimAt(FVector hitLocation) {
-    if (!tankAimingComponent) { return; }
+    if (!ensure(tankAimingComponent)) { return; }
     tankAimingComponent->AimAt(hitLocation, launchSpeed);
 }
 
 void ATank::Fire() {
     
+    if (!ensure(barrel)) { return ;}
+    
     // if is reloaded and has barrel => Fire
-    if (barrel && (FPlatformTime::Seconds() - lastFireTime) > reloadTimeInSeconds) {
+    if ((FPlatformTime::Seconds() - lastFireTime) > reloadTimeInSeconds) {
     
         // spawn a projectile at the socket location on the barrel
         auto projectile = GetWorld()->SpawnActor<AProjectile>(

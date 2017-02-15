@@ -23,7 +23,7 @@ void UtankAimingComponent::Initialise(UTankBarret *barrelToSet, UTankTurret *tur
 
 void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
     
-    if (!barrel) { return; }
+    if (!ensure(barrel)) { return; }
     
     FVector outLaunchVelocity;
     FVector startLocation = barrel->GetSocketLocation(FName("Projectile"));
@@ -56,7 +56,7 @@ void UtankAimingComponent::AimAt(FVector HitLocation, float launchSpeed) {
 void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     
     // Work-out difference between current barrel rotation, and AimDirection
-    if (!barrel || !turret) { return; }
+    if (!ensure(barrel && turret)) { return; }
     auto barrelRotator = barrel->GetForwardVector().Rotation();
     auto AimAsRotator = AimDirection.Rotation();
     auto deltaRotator = AimAsRotator - barrelRotator;
