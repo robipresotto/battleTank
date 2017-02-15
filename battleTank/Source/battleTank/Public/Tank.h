@@ -30,11 +30,15 @@ public:
     void SetBarrelReference(UTankBarret *barrelToSet);
     
 protected:
+    
+    UPROPERTY(BlueprintReadOnly)
     UtankAimingComponent *tankAimingComponent = nullptr;
+    
     UPROPERTY(BlueprintReadOnly)
     UTankMovementComponent *tankMovementComponent = nullptr;
 
 private:
+    
 	// Sets default values for this pawn's properties
 	ATank();
 
