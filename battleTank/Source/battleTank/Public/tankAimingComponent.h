@@ -36,17 +36,23 @@ public:
 protected:
     // accessed by tankPlayerController
     UPROPERTY(BlueprintReadOnly, Category = "State")
-    EFiringState tankFireState = EFiringState::Locked;
+    EFiringState firingState = EFiringState::Reloading;
 	
 private:
     
     UtankAimingComponent();
+    
+    virtual void BeginPlay() override;
+    
+    virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 
+    void MoveBarrelTowards(FVector AimDirection);
+
+    bool isBarrelMoving();
+    
     UTankBarret *barrel = nullptr;
     UTankTurret *turret = nullptr;
     
-    void MoveBarrelTowards(FVector AimDirection);
-
     UPROPERTY(EditDefaultsOnly, Category = "Firing")
     float launchSpeed = 4000;
     
@@ -57,5 +63,7 @@ private:
     TSubclassOf<AProjectile> projectileBlueprint;
     
     double lastFireTime = 0;
+    
+    FVector aimDirection;
     
 };
