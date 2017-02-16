@@ -1,7 +1,7 @@
 // Copyright 2017 Robinson Presotto. All rights reserved.
 
 #include "battleTank.h"
-#include "Tank.h"
+#include "tankAimingComponent.h"
 #include "tankAIController.h"
 
 void AtankAIController::BeginPlay() {
@@ -15,33 +15,19 @@ void AtankAIController::BeginPlay() {
 void AtankAIController::Tick( float DeltaTime ) {
     Super::Tick( DeltaTime );
     
-    auto playerTank = GetPlayerTank();
-    auto controlledTank = GetControlledTank();
+    auto playerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+    auto controlledTank = GetPawn();
     
-    if (ensure(playerTank)) {
+    if (!ensure(playerTank && controlledTank)) { return ; }
         
-        // Move towards the player
-        MoveToActor(playerTank, AcceptanceRadius);
+    // Move towards the player
+    MoveToActor(playerTank, AcceptanceRadius);
 
-        // Aim towards the player
-        controlledTank->AimAt(playerTank->GetActorLocation());
-        
-        // Fire if ready
-        controlledTank->Fire();
-        
-    }
-}
-
-ATank* AtankAIController::GetControlledTank() const {
-    return Cast<ATank>(GetPawn());
-}
-
-ATank* AtankAIController::GetPlayerTank() const {
+    // Aim towards the player
+    auto aimingComponent = controlledTank->FindComponentByClass<UtankAimingComponent>();
+    aimingComponent->AimAt(playerTank->GetActorLocation());
     
-    auto playerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-
-    if (!ensure(playerPawn)) { return nullptr; } else {
-        return Cast<ATank>(playerPawn);
-    }
+    // Fire if ready
+    aimingComponent->Fire();
     
 }

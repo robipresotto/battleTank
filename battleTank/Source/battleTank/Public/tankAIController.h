@@ -5,7 +5,6 @@
 #include "AIController.h"
 #include "tankAIController.generated.h"
 
-class ATank;
 
 UCLASS()
 class BATTLETANK_API AtankAIController : public AAIController
@@ -13,9 +12,6 @@ class BATTLETANK_API AtankAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
-    
-    ATank* GetControlledTank() const;
-    ATank* GetPlayerTank() const;
     
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
