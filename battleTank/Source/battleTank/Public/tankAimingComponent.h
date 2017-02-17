@@ -32,6 +32,8 @@ public:
     void Fire();
     
     void AimAt(FVector hitLocation);
+    
+    EFiringState getFiringState() const;
 
 protected:
     // accessed by tankPlayerController

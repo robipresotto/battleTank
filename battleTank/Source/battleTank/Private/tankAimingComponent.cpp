@@ -76,6 +76,10 @@ void UtankAimingComponent::AimAt(FVector HitLocation) {
     
 }
 
+EFiringState UtankAimingComponent::getFiringState() const {
+    return firingState;
+}
+
 void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     
     if (!ensure(barrel) || !ensure(turret)) { return; }
