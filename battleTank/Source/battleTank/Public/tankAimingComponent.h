@@ -14,7 +14,8 @@ UENUM()
 enum class EFiringState : uint8 {
     Locked,
     Aiming,
-    Reloading
+    Reloading,
+    OutOfAmmo
 };
 
 // Hold barrel's properties and Elevate method
@@ -31,10 +32,13 @@ public:
     UFUNCTION(BlueprintCallable, Category = "Firing")
     void Fire();
     
+    UFUNCTION(BlueprintCallable, Category = "Firing")
+    int GetRoundsLeft() const;
+    
     void AimAt(FVector hitLocation);
     
     EFiringState getFiringState() const;
-
+    
 protected:
     // accessed by tankPlayerController
     UPROPERTY(BlueprintReadOnly, Category = "State")
@@ -67,5 +71,7 @@ private:
     double lastFireTime = 0;
     
     FVector aimDirection;
+    
+    int roundsLeft = 3;
     
 };
