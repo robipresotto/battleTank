@@ -82,7 +82,7 @@ EFiringState UtankAimingComponent::getFiringState() const {
     return firingState;
 }
 
-int UtankAimingComponent::GetRoundsLeft() const {
+int32 UtankAimingComponent::GetRoundsLeft() const {
     return roundsLeft;
 }
 
