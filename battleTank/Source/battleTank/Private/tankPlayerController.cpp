@@ -50,21 +50,10 @@ bool AtankPlayerController::GetSightRayHitLocation(FVector &hitLocation) const {
     if (GetLookDirection(screenLocation, lookDirection)) {
         
         // Line-trace along that LookDirection, and see what we hit (up to max range)
-        GetLookVectorHitLocation(lookDirection, hitLocation);
-        
-        // GetLookVectorHitLocation()
-        // Make a LineTraceRange parameter = 10km
-        // Line-trace out to this distance in LookDirection
-        // Trace by ECC_Visibility channel (if you can see it)
-        // Return true if hits, and HitLocation as OUT
-        // Return false if nothing is hit
-        // Log-out to see what you're hitting
-        
-//        UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *lookDirection.ToString());
+        return GetLookVectorHitLocation(lookDirection, hitLocation);
     }
     
-    
-    return true;
+    return false;
     
 }
 

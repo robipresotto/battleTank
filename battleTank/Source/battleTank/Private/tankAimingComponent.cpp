@@ -84,9 +84,14 @@ void UtankAimingComponent::MoveBarrelTowards(FVector AimDirection) {
     auto barrelRotator = barrel->GetForwardVector().Rotation();
     auto AimAsRotator = AimDirection.Rotation();
     auto deltaRotator = AimAsRotator - barrelRotator;
-        
+    
+    // Always yaw the shortest way
     barrel->elevate(deltaRotator.Pitch);
-    turret->rotate(deltaRotator.Yaw);
+    if (FMath::Abs(deltaRotator.Yaw) < 180) {
+        turret->rotate(deltaRotator.Yaw);
+    } else {
+        turret->rotate(-deltaRotator.Yaw);
+    }
     
 }
 
