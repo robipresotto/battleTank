@@ -4,6 +4,8 @@
 #include "tankPlayerController.h"
 #include "tankAimingComponent.h"
 
+#include "Tank.h"
+
 void AtankPlayerController::BeginPlay() {
     Super::BeginPlay();
     
@@ -83,4 +85,19 @@ bool AtankPlayerController::GetLookVectorHitLocation(FVector lookDirection, FVec
         return false;
     }
     
+}
+
+void AtankPlayerController::SetPawn(APawn* InPawn) {
+    Super::SetPawn(InPawn);
+    if (InPawn) {
+        auto PossessedTank = Cast<ATank>(InPawn);
+        if (!ensure(PossessedTank)) { return; }
+        
+        // Subscribe our local method to the tank's death event
+        PossessedTank->OnDeath.AddUniqueDynamic(this, &AtankPlayerController::OnPossedTankDeath);
+    }
+}
+
+void AtankPlayerController::OnPossedTankDeath() {
+    StartSpectatingOnly();
 }

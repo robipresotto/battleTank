@@ -26,11 +26,13 @@ public:
 private:
     
     ATank();
+    
+    virtual void BeginPlay() override;
 
     UPROPERTY(EditDefaultsOnly, Category = "Setup")
     int32 startingHealth = 100;
     
     UPROPERTY(VisibleAnywhere, Category = "Health")
-    int32 currentHealth = startingHealth;
+    int32 currentHealth;
     	
 };
