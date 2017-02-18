@@ -25,6 +25,9 @@ AProjectile::AProjectile()
     impactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
     impactBlast->bAutoActivate = false;
 
+    explosionForce = CreateDefaultSubobject<URadialForceComponent>(FName("Explosion Force"));
+    explosionForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+    
 }
 
 // Called when the game starts or when spawned
@@ -40,7 +43,8 @@ void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, U
     
     launchBlast->Deactivate();
     impactBlast->Activate();
-    
+    explosionForce->FireImpulse();
+
 }
 
 void AProjectile::LaunchProjectile(float Speed) {
