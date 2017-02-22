@@ -1,6 +1,8 @@
 # battleTank
 Battle Tank made in UE4 + Xcode
 
+![alt tag](https://preview.ibb.co/bOOeOv/screenshot.png)
+
 To build the project
 
 1. Clone the repo
